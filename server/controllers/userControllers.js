@@ -26,7 +26,7 @@ const createUserDetails = async (req, res) => {
         const hashedPwd = await bcrypt.hash(pwd, salt);
 
         const task = await userModels.create({ uname, gmail, pwd: hashedPwd });
-        res.status(200).json({ data: task, message: "Registered Successfully" });
+        res.status(200).json({ message: "Registered Successfully" });
     } catch (e) {
         res.status(400).json({ message: e.message });
     }
@@ -60,8 +60,8 @@ const getUserDetails = async (req, res) => {
 const userVerify = async (req, res) => {
     try {
         const { token } = req.body;
-        const decode = await jwt.verify(token, SECRET_KEY)._doc;
-        res.status(200).json({ decode });
+        const data = await jwt.verify(token, SECRET_KEY)._doc;
+        res.status(200).json({ data });
     }   catch (e) {
         res.status(400).json({ message: e.message });
     }
