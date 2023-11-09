@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const { default: mongoose } = require('mongoose');
+const userRouters = require('./routers/userRouters');
 
 require('dotenv').config();
 const { PORT, MONGO_URI } = process.env;
@@ -16,3 +17,5 @@ mongoose.connect(MONGO_URI)
         });
     })
     .catch((e) => console.log(e.message));
+
+app.use('/blogvoyage', userRouters);
