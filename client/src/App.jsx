@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Dashboard from './components/Dashboard'
 import Register from './components/Register'
 import Login from './components/Login'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path={'/login'} element={ <Login /> } />
         </Routes>
         <Outlet />
+        <Footer />
       </Router>
     </Fragment>
   )

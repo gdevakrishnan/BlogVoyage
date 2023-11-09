@@ -12,7 +12,7 @@ function Navbar() {
             <header>
                 <nav>
                     <input type="checkbox" name="menu" id="menu" />
-                    <h1 className='logo'>BlogVoyage</h1>
+                    <h1 className='logo'>Blog Voyage</h1>
                     <label htmlFor="menu">
                         <i className={(menuBtn) ? "fa fa-bars menu" : "fa fa-close menu"} onClick={(e) => changeBtn(e)}></i>
                     </label>
