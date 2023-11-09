@@ -37,6 +37,11 @@ const getUserDetails = async (req, res) => {
     try {
         const { uname, gmail, pwd } = req.body;
         const preUser = await userModels.findOne({ gmail });
+        if (!preUser) {
+            res.status(200).json({message: "User Not Found"});
+            return;
+        }
+
         const pwdVerify = await bcrypt.compare(pwd, preUser.pwd);
 
         if (pwdVerify && preUser.uname == uname) {
@@ -51,4 +56,15 @@ const getUserDetails = async (req, res) => {
     }
 }
 
-module.exports = { createUserDetails, getUserDetails }
+// TOKEN VERIFY
+const userVerify = async (req, res) => {
+    try {
+        const { token } = req.body;
+        const decode = await jwt.verify(token, SECRET_KEY)._doc;
+        res.status(200).json({ decode });
+    }   catch (e) {
+        res.status(400).json({ message: e.message });
+    }
+}
+
+module.exports = { createUserDetails, getUserDetails, userVerify }
