@@ -432,7 +432,7 @@ footer .footer_content {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    padding: 10px 14px;
+    padding: 5px 14px;
 }
 
 .blog_page .blog_container .content .sample {

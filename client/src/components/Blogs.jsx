@@ -27,7 +27,8 @@ function Blogs() {
                                         <div className="content">
                                             <div className="sample">
                                                 <h1 className="blogTitle">{aBlog.post.blogTitle}</h1>
-                                                <p className="blog">{aBlog.post.blog.slice(0, 200)}</p>
+                                                <p className='blogAuthor'>Author: { aBlog.uname }</p>
+                                                <p className="blog">{aBlog.post.blog.slice(0, 150)}...</p>
                                             </div>
                                             <div className="btn">
                                                 <button className="readBtn">Read More</button>
