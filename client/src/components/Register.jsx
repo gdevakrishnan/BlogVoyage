@@ -1,29 +1,97 @@
-import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom';
+import React, { Fragment, useContext, useState } from 'react'
+import validator from 'validator';
+import { Link, useNavigate } from 'react-router-dom';
+import { createUserDetails } from '../services/ServiceWorkers';
+import userContext from '../context/userContext';
 
 function Register() {
+  const initialState = {uname: "", gmail: "", pwd: "", cpwd: ""};
+  const [userDetails, setUserDetails] = useState(initialState);
+  const { setMsg } = useContext(userContext)
+  const nav = useNavigate();
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    setUserDetails({...userDetails, [e.target.id]: e.target.value});
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (userDetails.uname.trim() == "" || userDetails.gmail.trim() == "" || userDetails.pwd.trim() == "" || userDetails.cpwd.trim() == "") {
+      setMsg("Enter all the Fields");
+      return;
+    }
+
+    if (!(validator.isEmail(userDetails.gmail.trim()))) {
+      setMsg("Invalid Email");
+      return;
+    }
+
+    if (!(userDetails.pwd.trim() === userDetails.cpwd.trim())) {
+      setMsg("Password Mismatch");
+      return;
+    }
+
+    createUserDetails({uname: userDetails.uname, gmail: userDetails.gmail, pwd: userDetails.pwd})
+      .then((response) => {
+        setMsg(response.message);
+        if (response.message === "Registered Successfully") {
+          nav('/login');
+        }
+      })
+      .catch((e) => console.log(e.message));
+  }
+
   return (
     <Fragment>
       <section className="page form_page">
-        <form autoComplete='OFF'>
+        <form autoComplete='OFF' onSubmit={(e) => handleSubmit(e)}>
           <h1 className="form_title">Sign up an account</h1>
           <div className="form_group">
             <label htmlFor="uname">User Name</label>
-            <input type="text" name="uname" id="uname" />
+            <input
+              type="text" 
+              name="uname"
+              id="uname" 
+              onChange={(e) => handleEdit(e)}
+            />
           </div>
+
           <div className="form_group">
             <label htmlFor="gmail">Email</label>
-            <input type="text" name="gmail" id="gmail" />
+            <input
+              type="text" 
+              name="gmail"
+              id="gmail" 
+              onChange={(e) => handleEdit(e)}
+            />
           </div>
+          
           <div className="form_group">
-            <label htmlFor="pwd">Passord</label>
-            <input type="password" name="pwd" id="pwd" />
+            <label htmlFor="pwd">Password</label>
+            <input
+              type="password" 
+              name="pwd"
+              id="pwd" 
+              onChange={(e) => handleEdit(e)}
+            />
           </div>
+          
           <div className="form_group">
-            <label htmlFor="cpwd">Re-Passord</label>
-            <input type="password" name="cpwd" id="cpwd" />
+            <label htmlFor="cpwd">Re-Password</label>
+            <input
+              type="password" 
+              name="cpwd"
+              id="cpwd" 
+              onChange={(e) => handleEdit(e)}
+            />
           </div>
-          <input type="submit" value="Register" />
+          
+          <input 
+            type="submit"
+            value="Register" 
+          />
           <p className="request">Already have an account? <Link to={'/login'}>Login</Link></p>
         </form>
       </section>
