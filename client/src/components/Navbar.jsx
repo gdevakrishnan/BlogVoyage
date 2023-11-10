@@ -27,6 +27,12 @@ function Navbar() {
                             (userDetails) ? (
                                 <Fragment>
                                     <li>
+                                        <Link to={'/new_post'} >New Post</Link>
+                                    </li>
+                                    <li>
+                                        <Link to={'/blogs'} >Blogs</Link>
+                                    </li>
+                                    <li>
                                         <Link to={'/logout'} >Logout</Link>
                                     </li>
                                 </Fragment>

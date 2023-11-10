@@ -10,6 +10,8 @@ import Message from './components/Message';
 import { userVerify } from './services/ServiceWorkers'
 import PageNotFound from './components/PageNotFound'
 import Logout from './components/Logout'
+import NewPost from './components/NewPost'
+import Blogs from './components/Blogs'
 
 function App() {
   const [userDetails, setUserDetails] = useState(null);
@@ -50,6 +52,8 @@ function App() {
             <Route path={'/register'} element={(userDetails) ? <PageNotFound /> : <Register />} />
             <Route path={'/login'} element={(userDetails) ? <PageNotFound /> : <Login />} />
             <Route path={'/logout'} element={(userDetails) ? <Logout /> : <PageNotFound />} />
+            <Route path={'/new_post'} element={(userDetails) ? <NewPost /> : <PageNotFound />} />
+            <Route path={'/blogs'} element={(userDetails) ? <Blogs /> : <PageNotFound />} />
             <Route path={'*'} element={<PageNotFound />} />
           </Routes>
           <Outlet />

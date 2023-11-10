@@ -68,7 +68,7 @@ function Register() {
           <div className="form_group">
             <label htmlFor="gmail">Email</label>
             <input
-              type="text"
+              type="email"
               name="gmail"
               id="gmail"
               onChange={(e) => handleEdit(e)}

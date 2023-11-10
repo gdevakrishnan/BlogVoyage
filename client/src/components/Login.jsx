@@ -39,6 +39,7 @@ function Login() {
         if (response.message === "Login Successfully") {
           localStorage.setItem("token", response.token);
           nav('/');
+          setUserDetails(initialState);
         }
       });
   }
@@ -55,16 +56,18 @@ function Login() {
               name="uname"
               id="uname"
               onChange={(e) => handleEdit(e)}
+              value={userDetails.uname}
             />
           </div>
 
           <div className="form_group">
             <label htmlFor="gmail">Email</label>
             <input
-              type="text"
+              type="email"
               name="gmail"
               id="gmail"
               onChange={(e) => handleEdit(e)}
+              value={userDetails.gmail}
             />
           </div>
 
@@ -75,6 +78,7 @@ function Login() {
               name="pwd"
               id="pwd"
               onChange={(e) => handleEdit(e)}
+              value={userDetails.pwd}
             />
           </div>
 

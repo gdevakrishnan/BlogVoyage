@@ -13,16 +13,6 @@ const userModels = new Schema (
         pwd: {
             type: String,
             require: true
-        },
-        posts: {
-            postTitle: {
-                type: String,
-                require: true
-            },
-            blog: {
-                type: String,
-                require: true
-            }
         }
     }, { timestamps: true }
 )
