@@ -12,9 +12,11 @@ import PageNotFound from './components/PageNotFound'
 import Logout from './components/Logout'
 import NewPost from './components/NewPost'
 import Blogs from './components/Blogs'
+import Blog from './components/Blog'
 
 function App() {
   const [userDetails, setUserDetails] = useState(null);
+  const [aBlogDetails, setABlogDetails] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -38,7 +40,9 @@ function App() {
     msg,
     setMsg,
     userDetails,
-    setUserDetails
+    setUserDetails,
+    aBlogDetails,
+    setABlogDetails
   }
 
   return (
@@ -54,6 +58,7 @@ function App() {
             <Route path={'/logout'} element={(userDetails) ? <Logout /> : <PageNotFound />} />
             <Route path={'/new_post'} element={(userDetails) ? <NewPost /> : <PageNotFound />} />
             <Route path={'/blogs'} element={(userDetails) ? <Blogs /> : <PageNotFound />} />
+            <Route path={'/blog'} element={(userDetails && aBlogDetails) ? <Blog /> : <PageNotFound />} />
             <Route path={'*'} element={<PageNotFound />} />
           </Routes>
           <Outlet />

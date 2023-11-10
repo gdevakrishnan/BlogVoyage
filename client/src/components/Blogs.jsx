@@ -1,10 +1,19 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useContext, useEffect, useState } from 'react'
 import { getAllPosts } from '../services/ServiceWorkers'
 import PageNotFound from './PageNotFound';
 import Loading from './Loading';
+import userContext from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
 
 function Blogs() {
+    const { setABlogDetails } = useContext(userContext);
     const [blogs, setBlogs] = useState(null);
+    const nav = useNavigate();
+
+    const viewBlog = (aBlog) => {
+        setABlogDetails(aBlog);
+        nav('/blog');
+    }
 
     useEffect(() => {
         getAllPosts()
@@ -31,7 +40,7 @@ function Blogs() {
                                                 <p className="blog">{aBlog.post.blog.slice(0, 150)}...</p>
                                             </div>
                                             <div className="btn">
-                                                <button className="readBtn">Read More</button>
+                                                <button className="readBtn" onClick={() => viewBlog(aBlog)}>Read More</button>
                                             </div>
                                         </div>
                                     </div>
