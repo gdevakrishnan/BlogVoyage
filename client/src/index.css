@@ -102,12 +102,12 @@ header nav label .menu {
 
 /* Message */
 .msg_container {
-    width: auto;
+    width: 30%;
     height: auto;
     padding: 10px 20px;
     background-color: var(--color5);
-    position: absolute;
-    top: 60px;
+    position: fixed;
+    bottom: 20px;
     right: 10px;
     border: 2px solid var(--color1);
     outline: 4px solid var(--color1);
@@ -132,6 +132,57 @@ header nav label .menu {
     font-size: 0.8rem;
     letter-spacing: 1px;
     border-radius: 2px;
+}
+
+@media screen and (max-width: 800px) {
+    .msg_container {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .msg_container {
+        width: 90%;
+    }
+}
+
+/* PAGE NOT FOUND */
+.pageNotFound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pageNotFound .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--color1);
+    outline: 4px solid var(--color1);
+    outline-offset: 2px;
+    padding: 20px 0px;
+    width: 30%;
+}
+
+.pageNotFound .main .pnfTitle {
+    font-size: 5rem;
+}
+
+.pageNotFound .main .pnfDesc {
+    font-size: 1.4rem;
+}
+
+@media screen and (max-width: 800px) {
+    .pageNotFound .main {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .pageNotFound .main {
+        width: 80%;
+    }
 }
 
 /* DASHBOARD */
@@ -279,4 +330,34 @@ footer .footer_content {
         display: block;
         text-align: center;
     }   
+}
+
+/* LOGOUT */
+.logout_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout_page .main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout_page .main .logoutDesc {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.logout_page .main .logoutBtn {
+    background-color: var(--color1);
+    color: var(--color5);
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    letter-spacing: 1px;
 }

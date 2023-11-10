@@ -5,14 +5,14 @@ import { createUserDetails } from '../services/ServiceWorkers';
 import userContext from '../context/userContext';
 
 function Register() {
-  const initialState = {uname: "", gmail: "", pwd: "", cpwd: ""};
+  const initialState = { uname: "", gmail: "", pwd: "", cpwd: "" };
   const [userDetails, setUserDetails] = useState(initialState);
   const { setMsg } = useContext(userContext)
   const nav = useNavigate();
 
   const handleEdit = (e) => {
     e.preventDefault();
-    setUserDetails({...userDetails, [e.target.id]: e.target.value});
+    setUserDetails({ ...userDetails, [e.target.id]: e.target.value });
   }
 
   const handleSubmit = (e) => {
@@ -28,16 +28,22 @@ function Register() {
       return;
     }
 
+    if (userDetails.pwd.trim().length < 8) {
+      setMsg("Password needs minimum 8 charachters");
+      return;
+    }
+    
     if (!(userDetails.pwd.trim() === userDetails.cpwd.trim())) {
       setMsg("Password Mismatch");
       return;
     }
 
-    createUserDetails({uname: userDetails.uname, gmail: userDetails.gmail, pwd: userDetails.pwd})
+    createUserDetails({ uname: userDetails.uname, gmail: userDetails.gmail, pwd: userDetails.pwd })
       .then((response) => {
         setMsg(response.message);
         if (response.message === "Registered Successfully") {
           nav('/login');
+          setUserDetails(initialState);
         }
       })
       .catch((e) => console.log(e.message));
@@ -51,46 +57,50 @@ function Register() {
           <div className="form_group">
             <label htmlFor="uname">User Name</label>
             <input
-              type="text" 
+              type="text"
               name="uname"
-              id="uname" 
+              id="uname"
               onChange={(e) => handleEdit(e)}
+              value={userDetails.uname}
             />
           </div>
 
           <div className="form_group">
             <label htmlFor="gmail">Email</label>
             <input
-              type="text" 
+              type="text"
               name="gmail"
-              id="gmail" 
+              id="gmail"
               onChange={(e) => handleEdit(e)}
+              value={userDetails.gmail}
             />
           </div>
-          
+
           <div className="form_group">
             <label htmlFor="pwd">Password</label>
             <input
-              type="password" 
+              type="password"
               name="pwd"
-              id="pwd" 
+              id="pwd"
               onChange={(e) => handleEdit(e)}
+              value={userDetails.pwd}
             />
           </div>
-          
+
           <div className="form_group">
             <label htmlFor="cpwd">Re-Password</label>
             <input
-              type="password" 
+              type="password"
               name="cpwd"
-              id="cpwd" 
+              id="cpwd"
               onChange={(e) => handleEdit(e)}
+              value={userDetails.cpwd}
             />
           </div>
-          
-          <input 
+
+          <input
             type="submit"
-            value="Register" 
+            value="Register"
           />
           <p className="request">Already have an account? <Link to={'/login'}>Login</Link></p>
         </form>

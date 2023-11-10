@@ -1,5 +1,6 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
+import userContext from '../context/userContext';
 
 function Navbar() {
     const [menuBtn, setMenuBtn] = useState(true);
@@ -7,6 +8,8 @@ function Navbar() {
         e.preventDefault();
         setMenuBtn(!menuBtn);
     }
+    const { userDetails } = useContext(userContext);
+
     return (
         <Fragment>
             <header>
@@ -16,16 +19,28 @@ function Navbar() {
                     <label htmlFor="menu">
                         <i className={(menuBtn) ? "fa fa-bars menu" : "fa fa-close menu"} onClick={(e) => changeBtn(e)}></i>
                     </label>
-                    <ul style={(menuBtn) ? {right: "-100%"} : {right: "0px"}}>
+                    <ul style={(menuBtn) ? { right: "-100%" } : { right: "0px" }}>
                         <li>
                             <Link to={'/'} >Home</Link>
                         </li>
-                        <li>
-                            <Link to={'/register'} >Register</Link>
-                        </li>
-                        <li>
-                            <Link to={'/login'} >Login</Link>
-                        </li>
+                        {
+                            (userDetails) ? (
+                                <Fragment>
+                                    <li>
+                                        <Link to={'/logout'} >Logout</Link>
+                                    </li>
+                                </Fragment>
+                            ) : (
+                                <Fragment>
+                                    <li>
+                                        <Link to={'/register'} >Register</Link>
+                                    </li>
+                                    <li>
+                                        <Link to={'/login'} >Login</Link>
+                                    </li>
+                                </Fragment>
+                            )
+                        }
                     </ul>
                 </nav>
             </header>

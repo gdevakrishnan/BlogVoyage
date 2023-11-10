@@ -44,9 +44,14 @@ const getUserDetails = async (req, res) => {
 
         const pwdVerify = await bcrypt.compare(pwd, preUser.pwd);
 
+        if (!(pwdVerify)) {
+            res.status(200).json({ message: "Wrong Password" });
+            return;
+        }
+
         if (pwdVerify && preUser.uname == uname) {
             const token = await jwt.sign({ ...preUser }, SECRET_KEY, { expiresIn: EXPIRY_TIME });
-            res.status(200).json({ token, message: "User Login Successfully" });
+            res.status(200).json({ token, message: "Login Successfully" });
             return;
         }
 
@@ -61,7 +66,7 @@ const userVerify = async (req, res) => {
     try {
         const { token } = req.body;
         const data = await jwt.verify(token, SECRET_KEY)._doc;
-        res.status(200).json({ data });
+        res.status(200).json({ data: {_id: data._id, uname: data.uname, gmail: data.gmail, posts: data.posts}, message: "Verified User" });
     }   catch (e) {
         res.status(400).json({ message: e.message });
     }
