@@ -101,6 +101,31 @@ header nav label .menu {
     }
 }
 
+/* LOADER */
+.loading_page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading_page .loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--color4);
+    border-top-color: var(--color1);
+    border-radius: 50%;
+    animation: load 1s linear infinite;
+}
+
+@keyframes load {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* Message */
 .msg_container {
     width: 30%;

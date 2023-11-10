@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { getAllPosts } from '../services/ServiceWorkers'
 import PageNotFound from './PageNotFound';
+import Loading from './Loading';
 
 function Blogs() {
     const [blogs, setBlogs] = useState(null);
@@ -37,7 +38,7 @@ function Blogs() {
                             })
                         }
                     </section>
-                ) : (<PageNotFound />)
+                ) : (<Loading />)
             }
         </Fragment>
     )
