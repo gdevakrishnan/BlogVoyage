@@ -115,6 +115,7 @@ header nav label .menu {
     border-top-color: var(--color1);
     border-radius: 50%;
     animation: load 1s linear infinite;
+    z-index: -3;
 }
 
 @keyframes load {
