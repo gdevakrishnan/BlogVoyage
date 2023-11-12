@@ -31,13 +31,13 @@ function Blogs() {
                                 return (
                                     <div className="blog_container" key={index}>
                                         <div className="img_container">
-                                            <img src="https://img.freepik.com/free-photo/notepad-laptop-concept_23-2147982614.jpg?w=740&t=st=1699610326~exp=1699610926~hmac=fa972a306620242a9b79b8c2b28c35aa38cd9e0a5780f0f447a7c5de9df5b0b7" alt={aBlog.post.blogTitle} />
+                                            <img src={`http://localhost:5000/public/thumbnails/${aBlog.thumbnail}`} alt={aBlog.blogTitle} />
                                         </div>
                                         <div className="content">
                                             <div className="sample">
-                                                <h1 className="blogTitle">{aBlog.post.blogTitle}</h1>
+                                                <h1 className="blogTitle">{aBlog.blogTitle}</h1>
                                                 <p className='blogAuthor'>Author: { aBlog.uname }</p>
-                                                <p className="blog">{aBlog.post.blog.slice(0, 150)}...</p>
+                                                <p className="blog">{aBlog.blog.slice(0, 150)}...</p>
                                             </div>
                                             <div className="btn">
                                                 <button className="readBtn" onClick={() => viewBlog(aBlog)}>Read More</button>

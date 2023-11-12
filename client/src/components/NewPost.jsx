@@ -3,34 +3,44 @@ import userContext from '../context/userContext';
 import { createNewPost } from '../services/ServiceWorkers';
 
 function NewPost() {
+    const blogDetails = new FormData();
     const { userDetails, setMsg } = useContext(userContext)
-    const initialState = { uname: userDetails.uname, gmail: userDetails.gmail, blogTitle: "", blog: "" };
-    const [blogDetails, setBlogDetails] = useState(initialState);
-
-    const handleEdit = (e) => {
-        e.preventDefault();
-        setBlogDetails({ ...blogDetails, [e.target.id]: e.target.value });
-    }
+    const initialState = "";
+    const [blogTitle, setBlogTitle] = useState(initialState);
+    const [blog, setBlog] = useState(initialState);
+    const [thumbnail, setThumbnail] = useState(initialState);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (blogDetails.uname.trim() == "" || blogDetails.gmail.trim() == "" || blogDetails.blogTitle.trim() == "" || blogDetails.blog.trim() == "") {
+        if (userDetails.uname.trim() == "" || userDetails.gmail.trim() == "" || blogTitle.trim() == "" || blog.trim() == "" || thumbnail == "") {
             setMsg("Enter all the Fields");
             return;
-          }
+        }
+
+        blogDetails.append("uname", userDetails.uname);
+        blogDetails.append("email", userDetails.gmail);
+        blogDetails.append("author", userDetails._id);
+        blogDetails.append("blogTitle", blogTitle);
+        blogDetails.append("blog", blog);
+        blogDetails.append("thumbnail", thumbnail);
+
+        console.log(userDetails);
 
         createNewPost(blogDetails)
             .then((response) => {
-                setMsg(response.message);
-                setBlogDetails(initialState);
+                // console.log(response);
+                // setMsg(response.message);
+                setBlogTitle(initialState);
+                setBlog(initialState);
+                setThumbnail(initialState);
             })
             .catch((e) => console.log(e.message));
     }
 
     return (
         <Fragment>
-            <section className="page form_page">
+            <section className="page form_page" encType="multipart/form-data">
                 <form autoComplete='OFF' onSubmit={(e) => handleSubmit(e)}>
                     <h1 className="form_title">Create a Blog</h1>
                     <div className="form_group">
@@ -39,8 +49,8 @@ function NewPost() {
                             type="text"
                             name="blogTitle"
                             id="blogTitle"
-                            onChange={(e) => handleEdit(e)}
-                            value={blogDetails.blogTitle}
+                            onChange={(e) => setBlogTitle(e.target.value)}
+                            value={blogTitle}
                         />
                     </div>
 
@@ -49,8 +59,19 @@ function NewPost() {
                         <textarea
                             name="blog"
                             id="blog"
-                            onChange={(e) => handleEdit(e)}
-                            value={blogDetails.blog}
+                            onChange={(e) => setBlog(e.target.value)}
+                            value={blog}
+                        />
+                    </div>
+
+                    <div className="form_group">
+                        <label htmlFor="thumbnail">Thumbnail</label>
+                        <input
+                            type="file"
+                            name="thumbnail"
+                            id="thumbnail"
+                            accept='image/*'
+                            onChange={(e) => setThumbnail(e.target.files[0])}
                         />
                     </div>
 

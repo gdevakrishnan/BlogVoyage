@@ -22,10 +22,10 @@ function Blog() {
                                 <button className="backBtn" onClick={(e) => backBtn(e)}>Back</button>
                             </div>
                             <div className="content">
-                                <h1 className='blogTitle'>{aBlogDetails.post.blogTitle}</h1>
+                                <h1 className='blogTitle'>{aBlogDetails.blogTitle}</h1>
                                 <p className='blogAuthor'>Author: {aBlogDetails.uname}</p>
                                 <p className='blog'>
-                                    {aBlogDetails.post.blog}
+                                    {aBlogDetails.blog}
                                 </p>
                             </div>
                         </div>
