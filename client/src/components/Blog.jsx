@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Blog() {
     const { aBlogDetails, setABlogDetails } = useContext(userContext);
     const nav = useNavigate();
+    const BASE_URL = "http://localhost:5000/public/thumbnails/";
     const backBtn = (e) => {
         e.preventDefault();
         nav('/blogs');
@@ -24,6 +25,9 @@ function Blog() {
                             <div className="content">
                                 <h1 className='blogTitle'>{aBlogDetails.blogTitle}</h1>
                                 <p className='blogAuthor'>Author: {aBlogDetails.uname}</p>
+                                <div className="img_container">
+                                    <img src={`${BASE_URL}${aBlogDetails.thumbnail}`} alt={aBlogDetails.blogTitle} />
+                                </div>
                                 <p className='blog'>
                                     {aBlogDetails.blog}
                                 </p>

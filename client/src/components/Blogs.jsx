@@ -1,6 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react'
 import { getAllPosts } from '../services/ServiceWorkers'
-import PageNotFound from './PageNotFound';
 import Loading from './Loading';
 import userContext from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function Blogs() {
     const { setABlogDetails } = useContext(userContext);
     const [blogs, setBlogs] = useState(null);
+    const BASE_URL = "http://localhost:5000/public/thumbnails/";
     const nav = useNavigate();
 
     const viewBlog = (aBlog) => {
@@ -31,7 +31,7 @@ function Blogs() {
                                 return (
                                     <div className="blog_container" key={index}>
                                         <div className="img_container">
-                                            <img src={`http://localhost:5000/public/thumbnails/${aBlog.thumbnail}`} alt={aBlog.blogTitle} />
+                                            <img src={`${BASE_URL}${aBlog.thumbnail}`} alt={aBlog.blogTitle} />
                                         </div>
                                         <div className="content">
                                             <div className="sample">

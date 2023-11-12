@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react'
 import userContext from '../context/userContext';
 import { createNewPost } from '../services/ServiceWorkers';
+import { useNavigate } from 'react-router-dom';
 
 function NewPost() {
     const blogDetails = new FormData();
@@ -9,6 +10,7 @@ function NewPost() {
     const [blogTitle, setBlogTitle] = useState(initialState);
     const [blog, setBlog] = useState(initialState);
     const [thumbnail, setThumbnail] = useState(initialState);
+    const nav = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,15 +27,13 @@ function NewPost() {
         blogDetails.append("blog", blog);
         blogDetails.append("thumbnail", thumbnail);
 
-        console.log(userDetails);
-
         createNewPost(blogDetails)
             .then((response) => {
-                // console.log(response);
-                // setMsg(response.message);
                 setBlogTitle(initialState);
                 setBlog(initialState);
                 setThumbnail(initialState);
+                setMsg(response.message);
+                nav('/blogs')
             })
             .catch((e) => console.log(e.message));
     }
