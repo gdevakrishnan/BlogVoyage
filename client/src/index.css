@@ -106,6 +106,8 @@ header nav label .menu {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .loading_page .loader {
@@ -551,4 +553,30 @@ footer .footer_content {
     .Ablog_page .main {
         width: 100%;
     }   
+}
+
+/* NO DATA FOUND */
+.noDataFound_page {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 100px;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.noDataFound_page .title {
+    font-size: 1.6rem;
+}
+
+.noDataFound_page .btn {
+    color: var(--color5);
+    background-color: var(--color1);
+    padding: 6px 16px;
+    outline: none;
+    border: none;
+    font-weight: 400;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    border-radius: 2px;   
 }

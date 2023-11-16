@@ -1,26 +1,32 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react'
-import { getAllPosts } from '../services/ServiceWorkers'
+import { deletePost, getAUserPosts } from '../services/ServiceWorkers'
 import Loading from './Loading';
 import userContext from '../context/userContext';
-import { useNavigate } from 'react-router-dom';
 import NoDataFound from './NoDataFound';
 
-function Blogs() {
-    const { setABlogDetails } = useContext(userContext);
+function Posts() {
+    const { userDetails, setMsg } = useContext(userContext);
+    const { _id } = userDetails;
     const [blogs, setBlogs] = useState(null);
     const BASE_URL = "http://localhost:5000/public/thumbnails/";
-    const nav = useNavigate();
-
-    const viewBlog = (aBlog) => {
-        setABlogDetails(aBlog);
-        nav('/blog');
-    }
 
     useEffect(() => {
-        getAllPosts()
-            .then((response) => setBlogs(response))
+        getAUserPosts({ _id })
+            .then((response) => {
+                setBlogs(response);
+            })
             .catch((e) => console.log(e.message));
     })
+
+    const handleDelete = (blogDetails) => {
+        deletePost(blogDetails)
+            .then((response) => {
+                if (respone.message === "Deleted Successfully") {
+                    setMsg(response.message);
+                }
+            })
+            .catch((e) => console.log(e.message));
+    }
 
     return (
         <Fragment>
@@ -38,11 +44,11 @@ function Blogs() {
                                             <div className="content">
                                                 <div className="sample">
                                                     <h1 className="blogTitle">{aBlog.blogTitle}</h1>
-                                                    <p className='blogAuthor'>Author: { aBlog.uname }</p>
+                                                    <p className='blogAuthor'>Author: {aBlog.uname}</p>
                                                     <p className="blog">{aBlog.blog.slice(0, 150)}...</p>
                                                 </div>
                                                 <div className="btn">
-                                                    <button className="readBtn" onClick={() => viewBlog(aBlog)}>Read More</button>
+                                                    <button className="readBtn" onClick={() => handleDelete(aBlog)}>DELETE <i className='fa fa-bitbucket'></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -57,4 +63,4 @@ function Blogs() {
     )
 }
 
-export default Blogs
+export default Posts
