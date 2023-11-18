@@ -39,6 +39,7 @@ function Login() {
         if (response.message === "Login Successfully") {
           localStorage.setItem("token", response.token);
           nav('/');
+          window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
           setUserDetails(initialState);
         }
       });

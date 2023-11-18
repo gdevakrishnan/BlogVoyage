@@ -15,16 +15,18 @@ function Blog() {
         e.preventDefault();
         nav('/blogs');
         setABlogDetails(null);
+        handlePlayPause();
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
     }
 
     const handlePlayPause = () => {
+        setPlaying(!(playing));
         if (playing) {
             window.speechSynthesis.cancel()
         } else {
             msg.text = aBlogDetails.blog;
             window.speechSynthesis.speak(msg)
         }
-        setPlaying(!(playing));
     }
 
     return (
@@ -42,7 +44,7 @@ function Blog() {
                                     <p className='blogAuthor'>Author: {aBlogDetails.uname}</p>
 
                                     <button onClick={() => handlePlayPause()} className='speecBtn'>
-                                        {(playing) ? (<i className='fa fa-volume-off'></i>) : (<i className='fa fa-volume-up'></i>)}
+                                        {(playing) ? (<h3>Stop <i className='fa fa-volume-off'></i></h3>) : (<h3>Play <i className='fa fa-volume-up'></i></h3>)}
                                     </button>
 
                                     <div className="img_container">

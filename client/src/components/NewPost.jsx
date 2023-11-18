@@ -33,7 +33,8 @@ function NewPost() {
                 setBlog(initialState);
                 setThumbnail(initialState);
                 setMsg(response.message);
-                nav('/blogs')
+                nav('/blogs');
+                window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
             })
             .catch((e) => console.log(e.message));
     }
