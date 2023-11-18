@@ -73,4 +73,16 @@ const deletePost = async (req, res) => {
     }
 }
 
-module.exports = { createNewPost, getAllPosts, getAUserPosts, deletePost };
+// UPDATE POST DETAILS (ONLY BLOG TITLE AND BLOG)
+const updateBlog = async (req, res) => {
+    try {
+        const { blog, blogTitle } = req.body;
+        const { id } = req.params;
+        const task = await postModels.findByIdAndUpdate({ _id: id }, { $set: {blog, blogTitle} });
+        res.status(200).json({message: "Updated Successfully"});
+    }   catch (e) {
+        res.status(400).json({ message: e.message });
+    }
+}
+
+module.exports = { createNewPost, getAllPosts, getAUserPosts, deletePost, updateBlog };
