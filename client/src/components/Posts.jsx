@@ -21,7 +21,7 @@ function Posts() {
     const handleDelete = (blogDetails) => {
         deletePost(blogDetails)
             .then((response) => {
-                if (respone.message === "Deleted Successfully") {
+                if (response.message === "Deleted Successfully") {
                     setMsg(response.message);
                 }
             })

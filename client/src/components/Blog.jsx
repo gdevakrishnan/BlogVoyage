@@ -14,9 +14,10 @@ function Blog() {
     const backBtn = (e) => {
         e.preventDefault();
         nav('/blogs');
+        window.speechSynthesis.cancel()
         setABlogDetails(null);
-        handlePlayPause();
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+        
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
 
     const handlePlayPause = () => {

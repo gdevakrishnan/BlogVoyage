@@ -4,6 +4,6 @@ const routers = express.Router()
 
 routers.get('/', getAllPosts);
 routers.post('/user_posts', getAUserPosts);
-routers.post('/delete_post', deletePost);
+routers.delete('/delete_post/:id', deletePost);
 
 module.exports = ('postRouters', routers);

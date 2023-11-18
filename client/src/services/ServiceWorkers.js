@@ -46,8 +46,7 @@ export const getAUserPosts = async (userDetails) => {
 
 // DELETE A USER POST
 export const deletePost = async (blogDetails) => {
-    console.log(blogDetails);
-    const task = await Axios.post(`${BASE_URL}/post/delete_post`, blogDetails);
+    const task = await Axios.delete(`${BASE_URL}/post/delete_post/${blogDetails._id}`,);
     const response = task.data;
     return response;
 }

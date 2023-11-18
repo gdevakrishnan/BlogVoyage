@@ -52,19 +52,23 @@ const getAUserPosts = async (req, res) => {
 }
 
 // DELETE A POST
+// Cannot send a body request for Axios.delete
 const deletePost = async (req, res) => {
     try {
-        const { _id, thumbnail } = req.body;
+        const { id } = req.params;
+        const postDetails = await postModels.findOne({ _id: id });
+        const { thumbnail } = postDetails;
         fs.unlink(path.join('public', 'thumbnails', thumbnail), async (e) => {
             if (e) {
                 res.status(200).json({ message: e.message });
                 return;
             }
 
-            const task = await postModels.findByIdAndDelete({ _id });
+            const task = await postModels.findByIdAndDelete({ _id:id });
             res.status(200).json({ message: "Deleted Successfully" });
         });
     } catch (e) {
+        console.log(`message: ${e.message}`);
         res.status(400).json({ message: e.message });
     }
 }
