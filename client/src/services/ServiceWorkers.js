@@ -46,7 +46,14 @@ export const getAUserPosts = async (userDetails) => {
 
 // DELETE A USER POST
 export const deletePost = async (blogDetails) => {
-    const task = await Axios.delete(`${BASE_URL}/post/delete_post/${blogDetails._id}`,);
+    const task = await Axios.delete(`${BASE_URL}/post/delete_post/${blogDetails._id}`);
+    const response = task.data;
+    return response;
+}
+
+// UPDATE POST
+export const updatePost = async (editBlogDetails) => {
+    const task = await Axios.put(`${BASE_URL}/post/update_post/${editBlogDetails._id}`, {blogTitle: editBlogDetails.blogTitle, blog: editBlogDetails.blog});
     const response = task.data;
     return response;
 }

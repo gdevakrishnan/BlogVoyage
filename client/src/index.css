@@ -31,6 +31,13 @@ body {
     height: auto;
 }
 
+.page .btn {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
 /* NAVBAR */
 header {
     width: 100%;
@@ -258,8 +265,9 @@ header nav label .menu {
 /* FORM */
 .form_page {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
 }
 
 .form_page form {
@@ -327,6 +335,13 @@ header nav label .menu {
 .form_page form .request a {
     color: var(--color3);
     font-weight: 900;
+}
+
+.form_page form input:focus, 
+.form_page form .form_group input:focus,
+.form_page form .form_group textarea:focus {
+    outline: 2px solid var(--color1);
+    outline-offset: 2px;
 }
 
 @media screen and (max-width: 900px) {
@@ -463,6 +478,14 @@ footer .footer_content {
     letter-spacing: 1px;
 }
 
+.blog_page .blog_container .content .btn .editBtn {
+    border: none;
+    outline: none;
+    color: var(--color1);
+    padding: 0px 10px;
+    font-size: 1.2rem;
+}
+
 @media screen and (max-width: 800px) {
     .blog_page .blog_container {
         flex-direction: column;
@@ -498,7 +521,8 @@ footer .footer_content {
     width: 100%;
 }
 
-.Ablog_page .main .btn .backBtn {
+.Ablog_page .main .btn .backBtn,
+.page .btn .backBtn {
     background-color: var(--color1);
     color: var(--color5);
     border: none;
@@ -508,8 +532,8 @@ footer .footer_content {
     letter-spacing: 1px;
 }
 
-.Ablog_page .main .btn .backBtn::before {
-    content: '< ';
+.page .btn .backBtn {
+    margin: 20px;
 }
 
 .Ablog_page .main .content {
@@ -551,7 +575,7 @@ footer .footer_content {
     object-position: center;
 }
 
-.Ablog_page .main .content .speecBtn {
+.Ablog_page .main .content .speechBtn {
     color: var(--color5);
     background-color: var(--color1);
     padding: 6px 16px;

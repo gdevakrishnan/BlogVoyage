@@ -14,10 +14,12 @@ import NewPost from './components/NewPost'
 import Blogs from './components/Blogs'
 import Blog from './components/Blog'
 import Posts from './components/Posts'
+import EditPost from './components/EditPost'
 
 function App() {
   const [userDetails, setUserDetails] = useState(null);
   const [aBlogDetails, setABlogDetails] = useState(null);
+  const [editBlogDetails, setEditBlogDetails] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -43,7 +45,9 @@ function App() {
     userDetails,
     setUserDetails,
     aBlogDetails,
-    setABlogDetails
+    setABlogDetails,
+    editBlogDetails,
+    setEditBlogDetails
   }
 
   return (
@@ -60,7 +64,8 @@ function App() {
             <Route path={'/new_post'} element={(userDetails) ? <NewPost /> : <PageNotFound />} />
             <Route path={'/blogs'} element={(userDetails) ? <Blogs /> : <PageNotFound />} />
             <Route path={'/posts'} element={(userDetails) ? <Posts /> : <PageNotFound />} />
-            <Route path={'/blog'} element={(userDetails && aBlogDetails) ? <Blog /> : <PageNotFound />} />
+            <Route path={'/blog'} element={(userDetails && aBlogDetails) ? <Blog /> : <Blogs />} />
+            <Route path={'/edit'} element={(userDetails && editBlogDetails) ? <EditPost /> : <Posts />} />
             <Route path={'*'} element={<PageNotFound />} />
           </Routes>
           <Outlet />

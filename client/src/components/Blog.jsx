@@ -38,13 +38,13 @@ function Blog() {
                         <section className='page Ablog_page'>
                             <div className="main">
                                 <div className="btn">
-                                    <button className="backBtn" onClick={(e) => backBtn(e)}>Back</button>
+                                    <button className="backBtn" onClick={(e) => backBtn(e)}><i className='fa  fa-angle-double-left'></i> Back</button>
                                 </div>
                                 <div className="content">
                                     <h1 className='blogTitle'>{aBlogDetails.blogTitle}</h1>
                                     <p className='blogAuthor'>Author: {aBlogDetails.uname}</p>
 
-                                    <button onClick={() => handlePlayPause()} className='speecBtn'>
+                                    <button onClick={() => handlePlayPause()} className='speechBtn'>
                                         {(playing) ? (<h3>Stop <i className='fa fa-volume-off'></i></h3>) : (<h3>Play <i className='fa fa-volume-up'></i></h3>)}
                                     </button>
 
