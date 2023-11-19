@@ -468,7 +468,8 @@ footer .footer_content {
     justify-content: flex-end;
 }
 
-.blog_page .blog_container .content .btn .readBtn {
+.blog_page .blog_container .content .btn .readBtn,
+.blog_post_page .blog_container .content .btn .deleteBtn  {
     border: none;
     outline: none;
     color: var(--color5);
@@ -478,12 +479,14 @@ footer .footer_content {
     letter-spacing: 1px;
 }
 
-.blog_page .blog_container .content .btn .editBtn {
+.blog_post_page .blog_container .content .btn .readBtn,
+.blog_post_page .blog_container .content .btn .editBtn{
     border: none;
     outline: none;
     color: var(--color1);
     padding: 0px 10px;
     font-size: 1.2rem;
+    background-color: transparent;
 }
 
 @media screen and (max-width: 800px) {
@@ -618,4 +621,6 @@ footer .footer_content {
     font-size: 0.8rem;
     letter-spacing: 1px;
     border-radius: 2px;
+    display: inline;
+    width: auto;
 }
