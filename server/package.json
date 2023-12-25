@@ -4,7 +4,7 @@
   "description": "A Blogging Web Application using MERN Stack Technologies",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Deva Krishnan G",
