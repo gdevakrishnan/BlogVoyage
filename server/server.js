@@ -6,7 +6,7 @@ const userRouters = require('./routers/userRouters');
 const postRouters = require('./routers/postRouters');
 const multer = require('multer');
 const path = require('path');
-const { createNewPost } = require('./controllers/postControllers');
+const { createNewPost, updateBlogAndThumbnail } = require('./controllers/postControllers');
 
 require('dotenv').config();
 const { PORT, MONGO_URI } = process.env;
@@ -51,7 +51,8 @@ const upload = multer(
 
 // Multer Middleware
 app.use('/blogvoyage/post/new_post', upload.single('thumbnail'), createNewPost);
+app.use('/blogvoyage/post/update_post_thumbnail/:id', upload.single('thumbnail'), updateBlogAndThumbnail);
 
-// Routers
+// Routers Middleware
 app.use('/blogvoyage', userRouters);
 app.use('/blogvoyage/post', postRouters);

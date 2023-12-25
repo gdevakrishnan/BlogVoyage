@@ -65,7 +65,7 @@ function App() {
             <Route path={'/blogs'} element={(userDetails) ? <Blogs /> : <PageNotFound />} />
             <Route path={'/posts'} element={(userDetails) ? <Posts /> : <PageNotFound />} />
             <Route path={'/blog'} element={(userDetails && aBlogDetails) ? <Blog /> : <Blogs />} />
-            <Route path={'/edit'} element={(userDetails && editBlogDetails) ? <EditPost /> : <Posts />} />
+            <Route path={'/edit'} element={(userDetails && editBlogDetails) ? <EditPost /> : <PageNotFound />} />
             <Route path={'*'} element={<PageNotFound />} />
           </Routes>
           <Outlet />

@@ -1,11 +1,18 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
 import userContext from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 import { updatePost } from '../services/ServiceWorkers';
 
 function EditPost() {
     const { editBlogDetails, setEditBlogDetails, setMsg } = useContext(userContext);
+    const [id, setId] = useState(editBlogDetails._id);
+    const [blogTitle, setBlogTitle] = useState(editBlogDetails.blogTitle);
+    const [blog, setBlog] = useState(editBlogDetails.blog);
+    const [prevThumbnail, setPrevThumbnail] = useState(editBlogDetails.thumbnail);
+    const [thumbnail, setThumbnail] = useState(null);
+
     const nav = useNavigate();
+    const updatedBlogDetails = new FormData();
 
     const backBtn = (e) => {
         e.preventDefault();
@@ -14,24 +21,31 @@ function EditPost() {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }
 
-    const handleEdit = (e) => {
-        setEditBlogDetails({ ...editBlogDetails, [e.target.id]: e.target.value });
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (editBlogDetails.blogTitle.trim() == "" || editBlogDetails.blog.trim() == "") {
+
+        if (blogTitle.trim() == "" || blog.trim() == "") {
             setMsg("The fields are empty");
             return;
         }
 
-        updatePost(editBlogDetails)
-            .then((response) => {
-                if (response.message == "Updated Successfully") {
-                    setMsg(response.message);
-                }
-            })
-            .catch((e) => console.log(e.message));
+        updatedBlogDetails.append("id", id);
+        updatedBlogDetails.append("blog", blog);
+        updatedBlogDetails.append("blogTitle", blogTitle);
+        updatedBlogDetails.append("prevThumbnail", prevThumbnail);
+
+        if (thumbnail) {
+            updatedBlogDetails.append("thumbnail", thumbnail);
+            console.log(updatedBlogDetails);
+        } else {
+            updatePost(updatedBlogDetails)
+                .then((response) => {
+                    if (response.message == "Updated Successfully") {
+                        setMsg(response.message);
+                    }
+                })
+                .catch((e) => console.log(e.message));
+        }
     }
 
     return (
@@ -48,8 +62,8 @@ function EditPost() {
                             type="text"
                             name="blogTitle"
                             id="blogTitle"
-                            value={editBlogDetails.blogTitle}
-                            onChange={(e) => handleEdit(e)}
+                            value={blogTitle}
+                            onChange={(e) => setBlogTitle(e.target.value)}
                         />
                     </div>
 
@@ -58,26 +72,27 @@ function EditPost() {
                         <textarea
                             name="blog"
                             id="blog"
-                            value={editBlogDetails.blog}
-                            onChange={(e) => handleEdit(e)}
+                            value={blog}
+                            onChange={(e) => setBlog(e.target.value)}
                         />
                     </div>
 
-                    {/* <div className="form_group">
+                    <div className="form_group">
                         <label htmlFor="thumbnail">Thumbnail</label>
                         <input
                             type="file"
                             name="thumbnail"
                             id="thumbnail"
                             accept='image/*'
+                            onChange={(e) => setThumbnail(e.target.files[0])}
                         />
-                    </div> */}
+                    </div>
 
                     <input
                         type="submit"
                         value="Update"
                     />
-                </form>                
+                </form>
             </section>
         </Fragment>
     )

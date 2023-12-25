@@ -452,14 +452,14 @@ footer .footer_content {
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 10px 20px;
-    gap: 20px;
+    gap: 5px;
 }
 
 .blog_page .blog_container .content .sample {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
 }
 
 .blog_page .blog_container .content .btn {

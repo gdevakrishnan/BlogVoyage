@@ -52,8 +52,12 @@ export const deletePost = async (blogDetails) => {
 }
 
 // UPDATE POST
-export const updatePost = async (editBlogDetails) => {
-    const task = await Axios.put(`${BASE_URL}/post/update_post/${editBlogDetails._id}`, {blogTitle: editBlogDetails.blogTitle, blog: editBlogDetails.blog});
+export const updatePost = async (updatedBlogDetails) => {
+    const _id = updatedBlogDetails.get("id");
+    const blogTitle = updatedBlogDetails.get("blogTitle");
+    const blog = updatedBlogDetails.get("blog");
+
+    const task = await Axios.put(`${BASE_URL}/post/update_post/${_id}`, {blogTitle, blog});
     const response = task.data;
     return response;
 }

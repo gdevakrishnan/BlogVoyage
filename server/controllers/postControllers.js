@@ -85,4 +85,13 @@ const updateBlog = async (req, res) => {
     }
 }
 
-module.exports = { createNewPost, getAllPosts, getAUserPosts, deletePost, updateBlog };
+const updateBlogAndThumbnail = async (req, res) => {
+    try {
+        console.log(Object.keys(req.body));
+        console.log(Object.keys(req.files));
+    }   catch (e) {
+        res.status(400).json({message: e.message});
+    }
+}
+
+module.exports = { createNewPost, getAllPosts, getAUserPosts, deletePost, updateBlog, updateBlogAndThumbnail };
