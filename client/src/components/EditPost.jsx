@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react'
 import userContext from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
-import { updatePost } from '../services/ServiceWorkers';
+import { updatePost, updateThumbnailAndPost } from '../services/ServiceWorkers';
 
 function EditPost() {
     const { editBlogDetails, setEditBlogDetails, setMsg } = useContext(userContext);
@@ -32,11 +32,17 @@ function EditPost() {
         updatedBlogDetails.append("id", id);
         updatedBlogDetails.append("blog", blog);
         updatedBlogDetails.append("blogTitle", blogTitle);
+        updatedBlogDetails.append("thumbnail", thumbnail);
         updatedBlogDetails.append("prevThumbnail", prevThumbnail);
 
         if (thumbnail) {
-            updatedBlogDetails.append("thumbnail", thumbnail);
-            console.log(updatedBlogDetails);
+            updateThumbnailAndPost(updatedBlogDetails)
+                .then((response) => {
+                    if (response.message == "Updated Successfully") {
+                        setMsg(response.message);
+                    }
+                })
+                .catch((e) => console.log(e.message));
         } else {
             updatePost(updatedBlogDetails)
                 .then((response) => {

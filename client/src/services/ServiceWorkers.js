@@ -56,8 +56,16 @@ export const updatePost = async (updatedBlogDetails) => {
     const _id = updatedBlogDetails.get("id");
     const blogTitle = updatedBlogDetails.get("blogTitle");
     const blog = updatedBlogDetails.get("blog");
-
+    
     const task = await Axios.put(`${BASE_URL}/post/update_post/${_id}`, {blogTitle, blog});
+    const response = task.data;
+    return response;
+}
+
+// UPDATE THUMBNAIL AND POST
+export const updateThumbnailAndPost = async (updatedBlogDetails) => {
+    const _id = updatedBlogDetails.get("id");
+    const task = await Axios.put(`${BASE_URL}/post/update_post_thumbnail/${_id}`, updatedBlogDetails);
     const response = task.data;
     return response;
 }

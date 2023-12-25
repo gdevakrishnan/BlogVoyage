@@ -64,7 +64,7 @@ const deletePost = async (req, res) => {
                 return;
             }
 
-            const task = await postModels.findByIdAndDelete({ _id:id });
+            const task = await postModels.findByIdAndDelete({ _id: id });
             res.status(200).json({ message: "Deleted Successfully" });
         });
     } catch (e) {
@@ -78,19 +78,29 @@ const updateBlog = async (req, res) => {
     try {
         const { blog, blogTitle } = req.body;
         const { id } = req.params;
-        const task = await postModels.findByIdAndUpdate({ _id: id }, { $set: {blog, blogTitle} });
-        res.status(200).json({message: "Updated Successfully"});
-    }   catch (e) {
+        const task = await postModels.findByIdAndUpdate({ _id: id }, { $set: { blog, blogTitle } });
+        res.status(200).json({ message: "Updated Successfully" });
+    } catch (e) {
         res.status(400).json({ message: e.message });
     }
 }
 
 const updateBlogAndThumbnail = async (req, res) => {
     try {
-        console.log(Object.keys(req.body));
-        console.log(Object.keys(req.files));
-    }   catch (e) {
-        res.status(400).json({message: e.message});
+        const { blog, blogTitle, prevThumbnail } = req.body;
+        const { id } = req.params;
+        const { filename } = req.file;
+        fs.unlink(path.join('public', 'thumbnails', prevThumbnail), async (e) => {
+            if (e) {
+                res.status(200).json({ message: e.message });
+                return;
+            }
+
+            const task = await postModels.findByIdAndUpdate({ _id: id }, { $set: { blog, blogTitle, thumbnail: filename } });
+            res.status(200).json({ message: "Updated Successfully" });
+        });
+    } catch (e) {
+        res.status(400).json({ message: e.message });
     }
 }
 
