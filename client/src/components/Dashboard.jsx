@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 
 function Dashboard() {
+  window.speechSynthesis.cancel();
+
   return (
     <Fragment>
       <section className="page dashboard">

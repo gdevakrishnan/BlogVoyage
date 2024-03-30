@@ -9,6 +9,7 @@ function Register() {
   const [userDetails, setUserDetails] = useState(initialState);
   const { setMsg } = useContext(userContext)
   const nav = useNavigate();
+  window.speechSynthesis.cancel();
 
   const handleEdit = (e) => {
     e.preventDefault();

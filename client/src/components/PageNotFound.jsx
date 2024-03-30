@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 
 function PageNotFound() {
+  window.speechSynthesis.cancel();
+
   return (
     <Fragment>
         <div className="page pageNotFound">

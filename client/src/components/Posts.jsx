@@ -11,6 +11,8 @@ function Posts() {
     const [blogs, setBlogs] = useState(null);
     const BASE_URL = "http://localhost:5000/public/thumbnails/";
     const nav = useNavigate();
+    window.speechSynthesis.cancel();
+
 
     useEffect(() => {
         getAUserPosts({ _id })

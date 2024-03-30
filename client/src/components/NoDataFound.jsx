@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function NoDataFound() {
     const nav = useNavigate();
+    window.speechSynthesis.cancel();
     
     return (
         <Fragment>

@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
-// const BASE_URL = "http://localhost:5000/blogvoyage";
-const BASE_URL = "https://blogvoyage-n3ou.onrender.com";
+const BASE_URL = "http://localhost:5000/blogvoyage";
+// const BASE_URL = "https://blogvoyage-n3ou.onrender.com";
 
 // REGISTER
 export const createUserDetails = async (userDetails) => {

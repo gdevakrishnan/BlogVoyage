@@ -14,7 +14,7 @@ function Blog() {
     const backBtn = (e) => {
         e.preventDefault();
         nav('/blogs');
-        window.speechSynthesis.cancel()
+        window.speechSynthesis.cancel();
         setABlogDetails(null);
         
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });

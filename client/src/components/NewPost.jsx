@@ -11,6 +11,7 @@ function NewPost() {
     const [blog, setBlog] = useState(initialState);
     const [thumbnail, setThumbnail] = useState(initialState);
     const nav = useNavigate();
+    window.speechSynthesis.cancel();
 
     const handleSubmit = (e) => {
         e.preventDefault();

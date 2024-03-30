@@ -10,6 +10,8 @@ function EditPost() {
     const [blog, setBlog] = useState(editBlogDetails.blog);
     const [prevThumbnail, setPrevThumbnail] = useState(editBlogDetails.thumbnail);
     const [thumbnail, setThumbnail] = useState(null);
+    window.speechSynthesis.cancel();
+
 
     const nav = useNavigate();
     const updatedBlogDetails = new FormData();

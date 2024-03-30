@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 function Logout() {
     const { setUserDetails, setMsg } = useContext(userContext);
     const nav = useNavigate();
+    window.speechSynthesis.cancel();
+
 
     const logoutUser = (e) => {
         e.preventDefault();
