@@ -16,7 +16,7 @@ app.use('/public/thumbnails', express.static('./public/thumbnails'));
 
 // Json and Cors (http and header handlers)
 app.use(express.json({extended: false}));
-app.use(cors({origin: true, Credential: true}));
+app.use(cors({origin: "*", Credential: true, methods: ["GET", "POST", "PUT", "DELETE"]}));
 
 // Database and server listening
 mongoose.connect(MONGO_URI)
