@@ -364,6 +364,7 @@ footer {
     justify-content: center;
     align-items: center;
     background-color: var(--color1);
+    padding: 10px;
 }
 
 footer .footer_content {
